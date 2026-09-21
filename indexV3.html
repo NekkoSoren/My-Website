@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kadez Felix — Electrical Engineering Portfolio</title>
+
+<!--
+  HOW TO CUSTOMIZE THIS FILE
+  - Replace "YOUR_NAME" / "Your Name" (title, nav, hero, footer) and the contact links with your info.
+  - Each carousel slide has placeholder title/description text — search "Project name" to jump
+    between them. Use the arrows, dots, drag, or arrow keys to cycle.
+  - Each ".viewport" box stands in for a photo/render/screenshot. Once you have images, put them
+    in the same folder as this file and replace the box's content with, e.g.
+    <img src="my-project.jpg" alt="Description of the project">
+  - I assumed the two club CAD projects and both honorable mentions are from the engineering club —
+    edit the two "the engineering club" mentions below if that's not right.
+  - To add another contact line, copy one of the ".term-line" rows in the Contact section.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg-void: #001736;
+    --bg-panel: #00183e;
+    --bg-panel2: #0B2E64;
+    --line-grid: rgba(31,182,232,0.06);
+    --border-dim: rgba(31,182,232,0.3);
+    --border-faint: rgba(255,255,255,0.08);
+    --text-bright: #EAF6FF;
+    --text-dim: #8FDCF8;
+    --text-faint: #5C86A3;
+    --amber: #1FB6E8;
+    --amber-dim: rgba(31,182,232,0.14);
+    --alert: #E8394F;
+    --alert-dim: rgba(232,57,79,0.14);
+    --glow-rgb: 31,182,232;
+    --font-display: 'Orbitron', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --maxw: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg-void), var(--bg-panel), var(--bg-panel2), var(--bg-panel), var(--bg-void));
+    background-size: 300% 300%;
+    animation: ocean-drift 20s ease-in-out infinite;
+    color: var(--text-bright);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  @keyframes ocean-drift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition: none !important; }
+  }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+  h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: 700; letter-spacing: 0.02em; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; position: relative; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+  /* Background layers */
+  .bg-grid { position: fixed; inset: 0; z-index: -3; background-image: linear-gradient(var(--line-grid) 1px, transparent 1px), linear-gradient(90deg, var(--line-grid) 1px, transparent 1px); background-size: 56px 56px; }
+  .bg-gear { position: fixed; bottom: -100px; right: -100px; width: 440px; height: 440px; color: rgba(255,162,60,0.06); z-index: -2; animation: spin 100s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .bg-scan { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: repeating-linear-gradient(rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px); }
+
+  /* Nav */
+  .hud-bar { position: sticky; top: 0; z-index: 50; background: rgba(10,14,21,0.88); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-faint); }
+  .hud-row { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { font-family: var(--font-mono); font-size: 0.95rem; color: var(--text-bright); }
+  .cursor { display: inline-block; width: 8px; height: 1em; background: var(--amber); margin-left: 3px; vertical-align: text-bottom; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .links { display: flex; gap: 2px; }
+  .links a { font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-dim); padding: 8px 10px; transition: color .2s; }
+  .links a::before { content: "["; color: var(--text-faint); margin-right: 3px; }
+  .links a::after { content: "]"; color: var(--text-faint); margin-left: 3px; }
+  .links a:hover { color: var(--amber); }
+  .menu-btn { display: none; background: var(--amber-dim); border: none; color: var(--amber); width: 36px; height: 36px; cursor: pointer; font-size: 1.1rem; font-family: var(--font-mono); }
+  @media (max-width: 760px) {
+    .links { position: fixed; top: 60px; left: 0; right: 0; background: var(--bg-panel); flex-direction: column; gap: 0; border-bottom: 1px solid var(--border-faint); display: none; }
+    .links.open { display: flex; }
+    .links a { padding: 14px 24px; }
+    .menu-btn { display: block; }
+  }
+
+  /* Hero */
+  .hero { padding: 70px 0 80px; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
+  .comment { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-faint); margin-bottom: 14px; }
+  .hero h1 { font-size: clamp(2rem, 4.2vw, 3.1rem); line-height: 1.15; }
+  .tagline { color: var(--text-dim); font-size: 1.05rem; margin-top: 16px; max-width: 48ch; font-family: var(--font-body); }
+  .stat-row { display: flex; gap: 32px; margin-top: 30px; }
+  .stat-num { display: block; font-family: var(--font-display); font-size: 1.5rem; color: var(--amber); }
+  .stat-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-faint); letter-spacing: 0.08em; }
+
+  .hero-visual { position: relative; padding: 36px; }
+  .bracket { position: absolute; width: 26px; height: 26px; pointer-events: none; }
+  .bracket .h { position: absolute; height: 2px; width: 100%; background: var(--amber); }
+  .bracket .v { position: absolute; width: 2px; height: 100%; background: var(--amber); }
+  .bracket-tl { top: 0; left: 0; } .bracket-tl .h, .bracket-tl .v { top: 0; left: 0; }
+  .bracket-tr { top: 0; right: 0; } .bracket-tr .h, .bracket-tr .v { top: 0; right: 0; }
+  .bracket-bl { bottom: 0; left: 0; } .bracket-bl .h, .bracket-bl .v { bottom: 0; left: 0; }
+  .bracket-br { bottom: 0; right: 0; } .bracket-br .h, .bracket-br .v { bottom: 0; right: 0; }
+  .circuit { width: 100%; height: auto; margin-top: 4px; }
+  .scan-block { margin-top: 22px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--text-dim); }
+  .scan-track { margin-top: 8px; height: 4px; background: rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+  .scan-fill { position: absolute; top: 0; bottom: 0; width: 36%; background: var(--amber); animation: scan 2.6s ease-in-out infinite; }
+  @keyframes scan { 0% { left: -36%; } 100% { left: 100%; } }
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { order: -1; max-width: 340px; margin: 0 auto; }
+  }
+
+  /* Section shell */
+  section { padding: 60px 0; }
+  .section-head { margin-bottom: 32px; max-width: 640px; }
+  .section-head h2 { font-size: 1.5rem; }
+  .section-head p { color: var(--text-dim); margin-top: 8px; font-family: var(--font-body); }
+
+  /* Carousel / console */
+  .console { position: relative; }
+  .console-frame {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-dim);
+    clip-path: polygon(22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%, 0 22px);
+    overflow: hidden;
+  }
+  .track { display: flex; transition: transform .5s cubic-bezier(.4,0,.2,1); touch-action: pan-y; }
+  .slide { flex: 0 0 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 36px; align-items: center; }
+  @media (max-width: 760px) { .slide { grid-template-columns: 1fr; padding: 24px; } }
+
+  .viewport {
+    aspect-ratio: 4 / 3;
+    background-image: linear-gradient(var(--line-grid) 1px, transparent 1px), linear-gradient(90deg, var(--line-grid) 1px, transparent 1px);
+    background-size: 18px 18px;
+    background-color: var(--bg-panel2);
+    border: 1px dashed var(--border-dim);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-faint); font-family: var(--font-mono); font-size: 0.78rem; text-align: center; padding: 16px;
+    position: relative; overflow: hidden; transition: transform .15s ease;
+  }
+  .viewport::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .3s; background: radial-gradient(160px circle at var(--mx, 50%) var(--my, 50%), rgba(255,162,60,0.18), transparent 60%); }
+  .viewport:hover::after { opacity: 1; }
+
+  .tag { font-family: var(--font-mono); font-size: 0.75rem; color: var(--amber); display: inline-block; margin-bottom: 12px; }
+  .tag::before { content: "["; margin-right: 3px; } .tag::after { content: "]"; margin-left: 3px; }
+  .slide-info h3 { font-size: 1.25rem; margin-bottom: 10px; }
+  .slide-info p { color: var(--text-dim); font-size: 0.96rem; margin: 0; font-family: var(--font-body); }
+  .callout { margin-top: 14px; padding: 8px 14px; background: var(--alert-dim); color: var(--alert); font-family: var(--font-mono); font-size: 0.8rem; display: inline-block; border-left: 2px solid var(--alert); }
+
+  .car-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; background: var(--bg-panel); border: 1px solid var(--border-dim); color: var(--amber); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 5; }
+  .car-btn.prev { left: -12px; } .car-btn.next { right: -12px; }
+  @media (max-width: 760px) { .car-btn { display: none; } }
+
+  .dots { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
+  .dot { width: 8px; height: 8px; background: var(--border-faint); border: none; cursor: pointer; padding: 0; }
+  .dot.active { background: var(--amber); }
+
+  /* Honorable mentions */
+  .honor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .honor-card { padding: 24px; background: var(--bg-panel); border-left: 2px solid var(--amber); }
+  .honor-log { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-faint); margin-bottom: 8px; }
+  .honor-card h3 { font-size: 1rem; margin-bottom: 6px; }
+  .honor-card p { margin: 0; color: var(--text-dim); font-size: 0.93rem; font-family: var(--font-body); }
+
+  /* Experience */
+  .timeline { display: flex; flex-direction: column; gap: 18px; }
+  .tl-row { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 14px; }
+  .tl-label { font-family: var(--font-mono); font-size: 0.85rem; }
+  .tl-label small { display: block; color: var(--text-faint); font-size: 0.72rem; margin-top: 2px; }
+  .tl-track { height: 8px; background: var(--bg-panel2); border: 1px solid var(--border-faint); position: relative; overflow: hidden; }
+  .tl-bar { position: absolute; inset: 0 auto 0 0; height: 100%; background: var(--amber); }
+  @media (max-width: 600px) { .tl-row { grid-template-columns: 1fr; } }
+
+  /* Contact */
+  .terminal-block { background: var(--bg-panel); border: 1px solid var(--border-faint); padding: 24px 28px; font-family: var(--font-mono); font-size: 0.92rem; }
+  .term-line { padding: 6px 0; color: var(--text-dim); }
+  .term-line .prompt { color: var(--amber); margin-right: 8px; }
+  .term-line a { color: var(--text-bright); border-bottom: 1px dashed var(--text-faint); }
+  .term-line a:hover { color: var(--amber); border-color: var(--amber); }
+
+  /* Footer */
+  footer.site-footer { padding: 36px 0 60px; text-align: center; color: var(--text-faint); font-family: var(--font-mono); font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<div class="bg-grid" aria-hidden="true"></div>
+<svg class="bg-gear" viewBox="0 0 200 200" aria-hidden="true">
+  <circle cx="100" cy="100" r="60" fill="none" stroke="currentColor" stroke-width="6" />
+  <g fill="currentColor">
+    <rect x="92" y="4" width="16" height="26" />
+    <rect x="92" y="170" width="16" height="26" />
+    <rect x="4" y="92" width="26" height="16" />
+    <rect x="170" y="92" width="26" height="16" />
+    <rect x="92" y="4" width="16" height="26" transform="rotate(45 100 100)" />
+    <rect x="92" y="170" width="16" height="26" transform="rotate(45 100 100)" />
+    <rect x="4" y="92" width="26" height="16" transform="rotate(45 100 100)" />
+    <rect x="170" y="92" width="26" height="16" transform="rotate(45 100 100)" />
+  </g>
+</svg>
+<div class="bg-scan" aria-hidden="true"></div>
+
+<div class="sr-only" id="liveRegion" aria-live="polite"></div>
+
+<header class="hud-bar">
+  <div class="wrap hud-row">
+    <a href="#home" class="brand">Kadez Felix<span class="cursor"></span></a>
+    <nav class="links" id="navLinks">
+      <a href="#projects">Projects</a>
+      <a href="#honors">Honors</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation">≡</button>
+  </div>
+</header>
+
+<main>
+  <section id="home" class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="comment">// electrical engineering — cad &amp; power systems</div>
+        <h1>Kadez Felix</h1>
+        <p class="tagline">Designing CAD models and building the electrical systems behind them — from classroom projects to EV battery packs.</p>
+        <div class="stat-row">
+          <div><span class="stat-num">05</span><span class="stat-label">PROJECTS</span></div>
+          <div><span class="stat-num">03</span><span class="stat-label">CLUBS</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="bracket bracket-tl"><span class="h"></span><span class="v"></span></div>
+        <div class="bracket bracket-tr"><span class="h"></span><span class="v"></span></div>
+        <div class="bracket bracket-bl"><span class="h"></span><span class="v"></span></div>
+        <div class="bracket bracket-br"><span class="h"></span><span class="v"></span></div>
+        <svg class="circuit" viewBox="0 0 300 220">
+          <g fill="none" stroke="var(--text-faint)" stroke-width="2">
+            <path d="M20 180 H110 V110 H200" />
+            <path d="M200 110 V40 H270" />
+            <path d="M110 110 V30" />
+          </g>
+          <g fill="var(--amber)">
+            <circle cx="20" cy="180" r="4" />
+            <circle cx="200" cy="110" r="4" />
+            <circle cx="110" cy="30" r="4" />
+          </g>
+        </svg>
+        <div class="scan-block">
+          <span>SYSTEMS NOMINAL</span>
+          <div class="scan-track"><div class="scan-fill"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <p>CAD builds from coursework and club work, plus independent design and technical writing. Drag, use the arrows, or hit the dots to cycle.</p>
+      </div>
+      <div class="console">
+        <div class="console-frame">
+          <div class="track" id="track">
+            <article class="slide">
+              <div class="viewport">&gt; awaiting image</div>
+              <div class="slide-info">
+                <span class="tag">Class project</span>
+                <h3>Project name</h3>
+                <p>One or two sentences on what you designed, the tools you used (SolidWorks, Fusion 360, etc.), and what it was for.</p>
+              </div>
+            </article>
+            <article class="slide">
+              <div class="viewport">&gt; awaiting image</div>
+              <div class="slide-info">
+                <span class="tag">Club project</span>
+                <h3>Project name</h3>
+                <p>Describe the design, your role on the team, and the outcome.</p>
+              </div>
+            </article>
+            <article class="slide">
+              <div class="viewport">&gt; awaiting image</div>
+              <div class="slide-info">
+                <span class="tag">Club project</span>
+                <h3>Project name</h3>
+                <p>Describe the design, your role on the team, and the outcome.</p>
+              </div>
+            </article>
+            <article class="slide">
+              <div class="viewport">&gt; awaiting image</div>
+              <div class="slide-info">
+                <span class="tag">Personal project</span>
+                <h3>Project name</h3>
+                <p>Describe the problem you set out to solve and what you learned building it from scratch.</p>
+              </div>
+            </article>
+            <article class="slide">
+              <div class="viewport">&gt; awaiting image</div>
+              <div class="slide-info">
+                <span class="tag">Technical writing</span>
+                <h3>iFixit repair guide</h3>
+                <p>Wrote a technical repair guide for iFixit — add a sentence on what device it covered and what the guide walked through.</p>
+                <div class="callout">! recognition: letter of recommendation from iFixit</div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <button class="car-btn prev" id="prevBtn" aria-label="Previous project">‹</button>
+        <button class="car-btn next" id="nextBtn" aria-label="Next project">›</button>
+      </div>
+      <div class="dots" id="dots">
+        <button class="dot active" aria-label="Go to project 1"></button>
+        <button class="dot" aria-label="Go to project 2"></button>
+        <button class="dot" aria-label="Go to project 3"></button>
+        <button class="dot" aria-label="Go to project 4"></button>
+        <button class="dot" aria-label="Go to project 5"></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="honors">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Honorable mentions</h2>
+        <p>Hands-on contributions that didn't become standalone projects, but mattered.</p>
+      </div>
+      <div class="honor-grid">
+        <div class="honor-card">
+          <div class="honor-log">LOG_01</div>
+          <h3>Technical drawings for manufacturing</h3>
+          <p>Helped produce the technical drawings used to manufacture parts for the engineering club.</p>
+        </div>
+        <div class="honor-card">
+          <div class="honor-log">LOG_02</div>
+          <h3>EV battery pack builds</h3>
+          <p>Helped build several battery packs for electric vehicles with the engineering club.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Experience</h2>
+        <p>Club involvement, shown by how long each one ran.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-row">
+          <div class="tl-label">Physics club<small>1 year</small></div>
+          <div class="tl-track"><div class="tl-bar" style="width:100%"></div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-label">Engineering club<small>1 year</small></div>
+          <div class="tl-track"><div class="tl-bar" style="width:100%"></div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-label">Civil engineering club<small>1 semester</small></div>
+          <div class="tl-track"><div class="tl-bar" style="width:50%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Contact</h2>
+        <p>Reach out about internships, projects, or club collaborations.</p>
+      </div>
+      <div class="terminal-block">
+        <div class="term-line"><span class="prompt">$</span>open <a href="mailto:your.email@example.com">mail://your.email@example.com</a></div>
+        <div class="term-line"><span class="prompt">$</span>open <a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">linkedin://yourname</a></div>
+        <div class="term-line"><span class="prompt">$</span>open <a href="https://www.ifixit.com/User/yourprofile" target="_blank" rel="noopener">ifixit://yourprofile</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">// end of transmission — your name, electrical engineering</footer>
+
+<script>
+  // Mobile nav toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Carousel — pure user-driven, no timers: fewer moving parts, nothing to race against.
+  const track = document.getElementById('track');
+  const slides = Array.from(track.children);
+  const dots = Array.from(document.querySelectorAll('.dot'));
+  const liveRegion = document.getElementById('liveRegion');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const carouselEl = document.querySelector('.console');
+  let index = 0;
+  let dragStartX = 0, dragDelta = 0, dragging = false;
+
+  function goTo(i) {
+    index = (i + slides.length) % slides.length;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach((d, di) => d.classList.toggle('active', di === index));
+    const titleEl = slides[index].querySelector('h3');
+    liveRegion.textContent = `Project ${index + 1} of ${slides.length}: ${titleEl ? titleEl.textContent : ''}`;
+  }
+
+  prevBtn.addEventListener('click', () => goTo(index - 1));
+  nextBtn.addEventListener('click', () => goTo(index + 1));
+  dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+  carouselEl.setAttribute('tabindex', '0');
+  carouselEl.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') goTo(index + 1);
+    if (e.key === 'ArrowLeft') goTo(index - 1);
+  });
+
+  track.addEventListener('pointerdown', e => {
+    dragging = true; dragStartX = e.clientX; track.style.transition = 'none';
+  });
+  window.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    dragDelta = e.clientX - dragStartX;
+    track.style.transform = `translateX(calc(-${index * 100}% + ${dragDelta}px))`;
+  });
+  window.addEventListener('pointerup', () => {
+    if (!dragging) return;
+    dragging = false; track.style.transition = '';
+    if (dragDelta < -60) goTo(index + 1);
+    else if (dragDelta > 60) goTo(index - 1);
+    else goTo(index);
+    dragDelta = 0;
+  });
+
+  // Cursor tilt + amber glass-shine on project media (pointer devices only)
+  if (window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.viewport').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        const rx = (py - 0.5) * -10;
+        const ry = (px - 0.5) * 10;
+        el.style.transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+        el.style.setProperty('--mx', `${px * 100}%`);
+        el.style.setProperty('--my', `${py * 100}%`);
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = 'perspective(700px) rotateX(0deg) rotateY(0deg)';
+      });
+    });
+  }
+</script>
+</body>
+</html>
